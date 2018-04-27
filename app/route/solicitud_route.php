@@ -17,10 +17,10 @@ $app->group('/solicitud/', function () {
                      json_encode($this->model->solicitud->obtener($args['acronimo'],$args['consecutivo']))
                    );
     });
-        $this->get('obtenerDeptoCompras', function ($req, $res, $args) {
+    $this->get('obtenerPorFecha/{fecha}', function ($req, $res, $args) {
         return $res->withHeader('Content-type', 'application/json')
                    ->write(
-                     json_encode($this->model->solicitud->obtenerDeptoCompras())
+                     json_encode($this->model->solicitud->obtenerPorFecha($args['fecha']))
                    );
     });
     $this->post('registrar', function ($req, $res, $args) {

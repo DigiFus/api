@@ -64,7 +64,21 @@ class SolicitudModel
 
 
     }
-    
+    public function obtenerPorFecha($fecha)
+    {
+      $resp = $this->db->from($this->table)
+                        ->select(null)->select('
+                            solicitudes.fecha_solicitud,
+                            solicitudes.acronimo_solicitud,
+                            solicitudes.consecutivo_solicitud,
+                            usuarios.nom_usuario,
+                            usuarios.carrera_usuario
+                          ')
+                        ->innerJoin('usuarios on solicitudes.email_usuario = usuarios.email_usuario')
+                        ->where('fecha_solicitud', $fecha)
+                        ->fetchAll();
+      return $resp;
+    }
     public function registrar($data)
     {
         $dateTime=date('Y/m/d h:i:s', time());
