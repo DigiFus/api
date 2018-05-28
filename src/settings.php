@@ -17,9 +17,9 @@ return [
         // Configuración de mi APP
         'app_token_name'   => 'TOKEN-DIGIFUS',
         'connectionString' => [
-            'dns'  => 'mysql:host=localhost;dbname=digifus;charset=utf8',
-            'user' => 'root',
-            'pass' => ''
+            'dns'  => 'mysql:host=puffalexa.com;dbname=puffalex_digifus;charset=utf8',
+            'user' => 'puffalex_root',
+            'pass' => '1qazxsw2*'
         ]
     ],
 ];

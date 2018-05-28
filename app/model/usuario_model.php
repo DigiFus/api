@@ -21,8 +21,9 @@ class UsuarioModel
         //select(null) sirve para mostrar los campos indicados en el select
                          ->select(null)->select(
                             ' email_usuario,
-                              carrera_usuario,
-                              semestre_usuario
+                              nom_usuario,
+                              estado_usuario,
+                              rol_usuario
                             ')
                          ->limit($l)
                          ->offset($p)
@@ -39,49 +40,16 @@ class UsuarioModel
             'total' => $total
         ];
     }
-
-    public function obtener($email_usuario)
-    {
-
-        return $this->db->from($this->table)
-                        ->select(null)->select(
-                            ' email_usuario,
-                              carrera_usuario,
-                              semestre_usuario
-                            ')
-                        ->where('email_usuario', $email_usuario)
-                        ->fetch();
+    public function actualizar($data,$correo){
+      if(isset($data['pass'])){
+            $data['pass'] = md5($data['pass']);
+      }
+      $this->db->update($this->table, $data)
+                 ->where('email_usuario', $correo)
+                 ->execute();
+        return $this->response->SetResponse(true);
     }
+
+        
     
-    public function registrar($data)
-    {
-        $data['pass_usuario'] = md5($data['pass_usuario']);
-
-        $this->db->insertInto($this->table, $data)
-                 ->execute();
-
-        return $this->response->SetResponse(true);
-    }
-
-    public function actualizar($data, $email_usuario)
-    {
-        if(isset($data['pass_usuario'])){
-            $data['pass_usuario'] = md5($data['pass_usuario']);
-        }
-
-        $this->db->update($this->table, $data)
-                 ->where('email_usuario', $email_usuario)
-                 ->execute();
-
-        return $this->response->SetResponse(true);
-    }
-
-    public function eliminar($email_usuario)
-    {
-        $this->db->deleteFrom($this->table)
-        		 ->where('email_usuario',$email_usuario)
-                 ->execute();
-
-        return $this->response->SetResponse(true);
-    }
 }

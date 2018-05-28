@@ -62,4 +62,4 @@ $app->group('/usuario/', function () {
                      json_encode($this->model->usuario->eliminar($args['email_usuario']))
                    );
     });
-})->add(new AuthMiddleware($app));
+});//->add(new AuthMiddleware($app));

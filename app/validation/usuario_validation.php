@@ -25,7 +25,8 @@ class UsuarioValidation {
                 $value = $data[$key];
                 
                 if( !filter_var($value, FILTER_VALIDATE_EMAIL) ) {
-                    $response->errors[$key][] = 'Valor ingresado no es un correo válido';
+                    $response->errors[$key][] = 'El correo ingresado no es válido, Verifique que haya colocado el arroba ( @ ) y que finalice con .com, .com.co, .net, etc.';
+
                 }
             }
         }
@@ -39,7 +40,7 @@ class UsuarioValidation {
                 $value = $data[$key];
 
                 if(strlen($value) < 8) {
-                    $response->errors[$key][] = 'Debe contener como mínimo 8 caracteres';
+                    $response->errors[$key][] = 'Su contraseña debe contener como mínimo 8 caracteres';
                 }
             }            
         } else {
@@ -47,7 +48,7 @@ class UsuarioValidation {
                 $value = $data[$key];
 
                 if(strlen($value) < 8) {
-                    $response->errors[$key][] = 'Debe contener como mínimo 8 caracteres';
+                    $response->errors[$key][] = 'Su contraseña debe contener como mínimo 8 caracteres';
                 }
             }
         }

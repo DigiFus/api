@@ -17,20 +17,24 @@ class AuthModel
     }
 
     public function autenticar($correo, $password) {
-        $empleado = $this->db->from($this->table)
+        $usuario = $this->db->from($this->table)
                              ->where('email_usuario', $correo)
                              ->where('pass_usuario', md5($password))
                              ->fetch();
 
-        if(is_object($empleado)){
-
+        if(is_object($usuario)){
+           
             //$nombre = explode(' ', $empleado->NOMBRE_EMPLEADO)[0];
             //$nombre = $empleado->NOMBRE_EMPLEADO;
             $token = Auth::SignIn([
-                
-                'EsAdmin' => (bool)true
+                'Nombre' => $usuario->nom_usuario,
+                'Usuario' =>$usuario->email_usuario,
+                'RolUsuario' =>$usuario->rol_usuario,
+                'EstadoUsuario' =>$usuario->estado_usuario
+                //'EsAdmin' => (bool)true
             ]);
 
+            
             $this->response->result = $token;
 
             return $this->response->SetResponse(true);
