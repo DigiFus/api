@@ -62,7 +62,7 @@ class UsuarioModel
         return $this->response->SetResponse(true);
     }
 
-    
+  
 
     public function actualizar($data,$correo){
       if(isset($data['pass_usuario'])){
