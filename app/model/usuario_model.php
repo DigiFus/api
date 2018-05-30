@@ -43,32 +43,26 @@ class UsuarioModel
 
 
     public function obtener($email_usuario)
--   {
--
--        return $this->db->from($this->table)
--                        ->select(null)->select(
--                            ' email_usuario,
--                              nom_usuario
--                            ')
--                        ->where('email_usuario', $email_usuario)
--                        ->fetch();
--    }
+   {
+
+        return $this->db->from($this->table)
+                        ->select(null)->select(
+                            ' email_usuario,
+                              nom_usuario
+                            ')
+                        ->where('email_usuario', $email_usuario)
+                        ->fetch();
+    }
       
     public function registrar($data)
--    {
--        $data['pass_usuario'] = md5($data['pass_usuario']);
--
--        $this->db->insertInto($this->table, $data)
-+    public function actualizar($data,$correo){
-+      if(isset($data['pass'])){
-+            $data['pass'] = md5($data['pass']);
-+      }
-+      $this->db->update($this->table, $data)
-+                 ->where('email_usuario', $correo)
-                  ->execute();
--
-         return $this->response->SetResponse(true);
-     }
+    {
+        $data['pass_usuario'] = md5($data['pass_usuario']);
+
+        $this->db->insertInto($this->table, $data);
+        return $this->response->SetResponse(true);
+    }
+
+    
 
     public function actualizar($data,$correo){
       if(isset($data['pass_usuario'])){
